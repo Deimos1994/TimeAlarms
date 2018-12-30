@@ -15,7 +15,10 @@
 // http://forum.arduino.cc/index.php?topic=66054.0
 
 #include <TimeLib.h>
+#include <time.h>
 #include <TimeAlarms.h>
+// add necessery ESP libs for wi-fi, etc.
+
 
 AlarmId id;
 
@@ -37,8 +40,17 @@ void setup() {
 }
 
 void loop() {
-  digitalClockDisplay();
-  Alarm.delay(1000); // wait one second between clock display
+  Alarm.delay(0); // wait one second between clock display
+  
+  // ================ for ESP8266/ESP32
+  // ============== set alarms only if got time sync
+  if(time(nullptr) > 1546136826 && alarmsSetOk == false){
+    Serial.println("===============================");
+    Serial.println("Ok, got time...");
+    Serial.println("Setting alarms...");
+    Alarm.alarmRepeat(4,41,0, testFun);  // every day, call fun
+     alarmsSetOk = true;
+    }==============
 }
 
 // functions to be called when an alarm triggers:
