@@ -50,12 +50,12 @@ using the Alarms library.  The timeliness of triggers depends on sketch delays u
 
 
  
-Here is an example sketch:
+### Here is an example sketch:
 
-This sketch  triggers daily alarms at 8:30 am and 17:45 pm.
-A Timer is triggered every 15 seconds, another timer triggers once only after 10 seconds.
-A weekly alarm is triggered every Sunday at 8:30:30
-`
+//This sketch  triggers daily alarms at 8:30 am and 17:45 pm.
+//A Timer is triggered every 15 seconds, another timer triggers once only after 10 seconds.
+//A weekly alarm is triggered every Sunday at 8:30:30
+
 #include <Time.h>
 #include <TimeAlarms.h>
 
@@ -119,8 +119,8 @@ void printDigits(int digits)
     Serial.print('0');
   Serial.print(digits);
 }
+//===============================
 
-`
 
 Note that the loop code calls Alarm.delay(1000) -  Alarm.delay must be used
 instead of the usual arduino delay function because the alarms are serviced in the Alarm.delay method.
@@ -131,41 +131,41 @@ Functional reference:
 
 // functions to create alarms and timers
 
-Alarm.triggerOnce(value, AlarmFunction);
+`Alarm.triggerOnce(value, AlarmFunction);`
   Description: Call user provided AlarmFunction once at the date and time of the given value
   See the Ttime library for more on time_t values 
   
-Alarm.alarmRepeat(Hour, Minute, Second,  AlarmFunction);
+`Alarm.alarmRepeat(Hour, Minute, Second,  AlarmFunction);`
   Description:  Calls user provided AlarmFunction  every day at the given Hour, Minute and Second.
 
-Alarm.alarmRepeat(value,  AlarmFunction);
+`Alarm.alarmRepeat(value,  AlarmFunction);`
   Description:  Calls user provided AlarmFunction  every day at the time indicated by the given value
 
-Alarm.alarmRepeat(DayOfWeek, Hour, Minute, Second,  AlarmFunction);
+`Alarm.alarmRepeat(DayOfWeek, Hour, Minute, Second,  AlarmFunction);`
   Description:  Calls user provided AlarmFunction  every week on the given  DayOfWeek, Hour, Minute and Second.
 
-Alarm.alarmOnce(Hour, Minute, Second,  AlarmFunction);
+`Alarm.alarmOnce(Hour, Minute, Second,  AlarmFunction);`
   Description:  Calls user provided AlarmFunction once when the Arduino time next reaches the given Hour, Minute and Second.
 
-Alarm.alarmOnce(value,  AlarmFunction);
+`Alarm.alarmOnce(value,  AlarmFunction);`
   Description:  Calls user provided AlarmFunction  once at the next  time indicated by the given value
 
-Alarm.alarmOnce(DayOfWeek, Hour, Minute, Second,  AlarmFunction);
+`Alarm.alarmOnce(DayOfWeek, Hour, Minute, Second,  AlarmFunction);`
   Description:  Calls user provided AlarmFunction  once only on the next  DayOfWeek, Hour, Minute and Second.
 
-Alarm.timerRepeat(Period, TimerFunction);
+`Alarm.timerRepeat(Period, TimerFunction);`
   Description:  Continuously calls user provided TimerFunction  after the given period in seconds has elapsed. 
 
-Alarm.timerRepeat(Hour, Minute, Second, TimerFunction);
+`Alarm.timerRepeat(Hour, Minute, Second, TimerFunction);`
   Description:  As timerRepeat above, but period is the number of seconds in the given Hour, Minute and Second parameters
 
-Alarm.timerOnce(Period, TimerFunction);
+`Alarm.timerOnce(Period, TimerFunction);`
   Description:  Calls user provided TimerFunction  once only after the given period in seconds has elapsed. 
 
-Alarm.timerOnce(Hour, Minute, Second, TimerFunction);
+`Alarm.timerOnce(Hour, Minute, Second, TimerFunction);`
   Description:  As timerOnce above, but period is the number of seconds in the given Hour, Minute and Second parameters
 
-Alarm.delay( period)
+`Alarm.delay( period)`
  Description: Similar to Arduino delay - pauses the program for the period (in miliseconds) specified.
  Call this function rather than the Arduino delay function when using the Alarms library.
  The timeliness of the triggers  depends on sketch delays using this function.
