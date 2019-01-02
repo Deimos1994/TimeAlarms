@@ -1,8 +1,12 @@
-About fork: Making TimeAlarms work with ESP8266 / ESP32.
+TimeAlarms fork to work with ESP8266 / ESP32
+=============================================
+
+# About fork
+
 ESP uses its time.h https://github.com/esp8266/Arduino/blob/master/tools/sdk/libc/xtensa-lx106-elf/include/time.h so some changes is needed. Don't know if I did everything correctly, but it works for me.
 P.S. Create Alarms only after ESP got time sync from server.
 
-Alarms
+# Alarms
 
 The Alarm library is a companion to the Time library that makes it easy to 
 perform tasks at specific times or after specific intervals.
@@ -11,38 +15,38 @@ Tasks scheduled at a particular time of day are called Alarms,
 tasks scheduled after an interval of time has elapsed are called Timers.
 These tasks can be created to continuously repeat or to occur once only.  
 
-Here is how you create an alarm to trigger a task repeatedly at a particular time of day:
-  Alarm.alarmRepeat(8,30,0, MorningAlarm);  
+### Here is how you create an alarm to trigger a task repeatedly at a particular time of day:
+ ` Alarm.alarmRepeat(8,30,0, MorningAlarm); ` 
 This would call the function MorningAlarm()  at 8:30 am every day.
 
-If you want the alarm to trigger only once you can use the alarmOnce  method:
-  Alarm.alarmOnce(8,30,0, MorningAlarm);  
+### If you want the alarm to trigger only once you can use the alarmOnce  method:
+ ` Alarm.alarmOnce(8,30,0, MorningAlarm);  `
 This calls a MorningAlarm() function in a sketch once only (when the time is next 8:30am)
 
-Alarms can be specified to trigger a task repeatedly at a particular day of week and time of day:
-  Alarm.alarmRepeat(dowMonday, 9,15,0, MondayMorningAlarm);  
+### Alarms can be specified to trigger a task repeatedly at a particular day of week and time of day:
+ ` Alarm.alarmRepeat(dowMonday, 9,15,0, MondayMorningAlarm);  `
 This would call the function WeeklyAlarm() at 9:15am every Monday.
 
-If you want the alarm to trigger once only on a particular day and time you can do this:
-   Alarm.alarmOnce(dowMonday, 9,15,0, MondayMorningAlarm);  
+### If you want the alarm to trigger once only on a particular day and time you can do this:
+ ` Alarm.alarmOnce(dowMonday, 9,15,0, MondayMorningAlarm);  `
 This would call the function MondayMorning() Alarm on the next Monday at 9:15am.
 
-Timers trigger tasks that occur after a specified interval of time has passed.
+### Timers trigger tasks that occur after a specified interval of time has passed.
 The timer interval can be specified in seconds, or in hour, minutes and seconds.
-  Alarm.timerRepeat(15, Repeats);            // timer task every 15 seconds    
+` Alarm.timerRepeat(15, Repeats);  `          // timer task every 15 seconds    
 This calls the Repeats() function in your sketch every 15 seconds.
 
-If you want a timer to trigger once only, you can use the timerOnce method:
-  Alarm.timerOnce(10, OnceOnly);             // called once after 10 seconds 
+### If you want a timer to trigger once only, you can use the timerOnce method:
+` Alarm.timerOnce(10, OnceOnly);    `         // called once after 10 seconds 
 This calls the onceOnly() function in a sketch 10 seconds after the timer is created. 
 
-If you want to trigger once at a specified date and time you can use the trigger Once() method:
-  Alarm. triggerOnce(time_t value,  explicitAlarm); // value specifies a date and time
+### If you want to trigger once at a specified date and time you can use the trigger Once() method:
+` Alarm. triggerOnce(time_t value,  explicitAlarm); `// value specifies a date and time
 (See the makeTime() method in the Time library to convert dates and times into time_t)
 
-Your sketch should call the Alarm.delay() function instead of the Arduino delay() function when
+### Your sketch should call the Alarm.delay() function instead of the Arduino delay() function when
 using the Alarms library.  The timeliness of triggers depends on sketch delays using this function.
-  Alarm.delay( period); // Similar to Arduino delay - pauses the program for the period (in milliseconds).
+` Alarm.delay( period);` // Similar to Arduino delay - pauses the program for the period (in milliseconds).
 
 
  
@@ -51,7 +55,7 @@ Here is an example sketch:
 This sketch  triggers daily alarms at 8:30 am and 17:45 pm.
 A Timer is triggered every 15 seconds, another timer triggers once only after 10 seconds.
 A weekly alarm is triggered every Sunday at 8:30:30
-
+`
 #include <Time.h>
 #include <TimeAlarms.h>
 
@@ -115,6 +119,9 @@ void printDigits(int digits)
     Serial.print('0');
   Serial.print(digits);
 }
+
+`
+
 Note that the loop code calls Alarm.delay(1000) -  Alarm.delay must be used
 instead of the usual arduino delay function because the alarms are serviced in the Alarm.delay method.
 Failing to regularly call Alarm.delay will result in the alarms not being triggered
