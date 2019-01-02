@@ -1,5 +1,5 @@
 ===================================================
-//about fork: making it work with ESP8266.
+//about fork: making it work with ESP8266 / ESP32.
 ESP uses its time.h https://github.com/esp8266/Arduino/blob/master/tools/sdk/libc/xtensa-lx106-elf/include/time.h so some changes is needed. Don't know if I did everything correctly, but it works for me.
 P.S. Create Alarms only after ESP got time sync from server.
 ===================================================
